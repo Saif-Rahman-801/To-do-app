@@ -2,22 +2,47 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  // let counter = 0;
-  const [counter, setCounter] = useState(40);
-  const increase = (data) => {
-    setCounter(counter + data);
-  };
-  const decrease = (data) => {
-    setCounter(counter - data);
+  const [toDoTitle, setToDoTitle] = useState("");
+  const [toDoList, setToDoList] = useState([]);
+
+  const createTodoHAndler = () => {
+    if (toDoTitle) {
+      const newTodo = {
+        id: Date.now(),
+        title: toDoTitle,
+        isComplete: false,
+      };
+      setToDoList([...toDoList, newTodo]);
+      setToDoTitle("")
+    } else {
+      alert("please enter a valid content");
+    }
   };
 
+  
+
   return (
-    <>
-      <p>The value of counter is {counter} </p>
-      <button onClick={() => increase(1)}>Increase the value by One</button>
-      <button onClick={() => increase(10)}>Increase the value by One</button>
-      <button onClick={() => decrease(2)}>Decrease the value by Two</button>
-    </>
+    <div className="to-do-container">
+      <div className="to-do">
+        <input
+          type="text"
+          name="text"
+          id="text"
+          value={toDoTitle}
+          onChange={(e) => setToDoTitle(e.target.value)}
+        />
+        <button onClick={createTodoHAndler}>Add to-do</button>
+        <ul className="to-do-list">
+          {toDoList.map((todo) => (
+            <li>
+              <span>{todo.title}</span>
+              <button>Edit</button>
+              <button>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 
