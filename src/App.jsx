@@ -4,6 +4,8 @@ import "./App.css";
 function App() {
   const [toDoTitle, setToDoTitle] = useState("");
   const [toDoList, setToDoList] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const [editableTodo, setEditableTdo] = useState(null);
 
   const createTodoHAndler = () => {
     if (toDoTitle) {
@@ -21,12 +23,29 @@ function App() {
 
   const deleteTodoHandler = (id) => {
     const newTodoList = toDoList.filter((item) => item.id !== id);
-    setToDoList(newTodoList)
+    setToDoList(newTodoList);
   };
 
   const editTodoHandler = (id) => {
-    
-  }
+    const toDoBeEdit = toDoList.find((item) => item.id === id);
+    setEditMode(true);
+    setEditableTdo(toDoBeEdit);
+    setToDoTitle(toDoBeEdit.title);
+  };
+
+  const updateTodoHandler = () => {
+    setToDoList(
+      toDoList.map((todo) => {
+        if (todo.id === editableTodo.id) {
+          todo.title = toDoTitle;
+          return todo;
+        }
+        return todo;
+      })
+    );
+    setEditMode(false);
+    setToDoTitle("");
+  };
 
   return (
     <div className="to-do-container">
@@ -38,12 +57,18 @@ function App() {
           value={toDoTitle}
           onChange={(e) => setToDoTitle(e.target.value)}
         />
-        <button onClick={createTodoHAndler}>Add to-do</button>
+        <button
+          onClick={() => {
+            editMode ? updateTodoHandler() : createTodoHAndler();
+          }}
+        >
+          {editMode ? "Update to do" : "Add to-do"}
+        </button>
         <ul className="to-do-list">
           {toDoList.map((todo) => (
             <li>
               <span>{todo.title}</span>
-              <button>Edit</button>
+              <button onClick={() => editTodoHandler(todo.id)}>Edit</button>
               <button onClick={() => deleteTodoHandler(todo.id)}>Delete</button>
             </li>
           ))}
