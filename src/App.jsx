@@ -13,13 +13,20 @@ function App() {
         isComplete: false,
       };
       setToDoList([...toDoList, newTodo]);
-      setToDoTitle("")
+      setToDoTitle("");
     } else {
       alert("please enter a valid content");
     }
   };
 
-  
+  const deleteTodoHandler = (id) => {
+    const newTodoList = toDoList.filter((item) => item.id !== id);
+    setToDoList(newTodoList)
+  };
+
+  const editTodoHandler = (id) => {
+    
+  }
 
   return (
     <div className="to-do-container">
@@ -37,7 +44,7 @@ function App() {
             <li>
               <span>{todo.title}</span>
               <button>Edit</button>
-              <button>Delete</button>
+              <button onClick={() => deleteTodoHandler(todo.id)}>Delete</button>
             </li>
           ))}
         </ul>
