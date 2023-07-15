@@ -12,7 +12,7 @@ function App() {
       const newTodo = {
         id: Date.now(),
         title: toDoTitle,
-        isComplete: false,
+        
       };
       setToDoList([...toDoList, newTodo]);
       setToDoTitle("");
@@ -45,6 +45,7 @@ function App() {
     );
     setEditMode(false);
     setToDoTitle("");
+    setEditableTdo(null)
   };
 
   return (
