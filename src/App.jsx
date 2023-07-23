@@ -62,6 +62,7 @@ function App() {
           onClick={() => {
             editMode ? updateTodoHandler() : createTodoHAndler();
           }}
+          className="add-btn"
         >
           {editMode ? "Update to do" : "Add to-do"}
         </button>
@@ -69,8 +70,8 @@ function App() {
           {toDoList.map((todo) => (
             <li>
               <span>{todo.title}</span>
-              <button onClick={() => editTodoHandler(todo.id)}>Edit</button>
-              <button onClick={() => deleteTodoHandler(todo.id)}>Delete</button>
+              <button className="edit-btn" onClick={() => editTodoHandler(todo.id)}>Edit</button>
+              <button className="delete-btn" onClick={() => deleteTodoHandler(todo.id)}>Delete</button>
             </li>
           ))}
         </ul>
