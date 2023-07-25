@@ -12,7 +12,6 @@ function App() {
       const newTodo = {
         id: Date.now(),
         title: toDoTitle,
-        
       };
       setToDoList([...toDoList, newTodo]);
       setToDoTitle("");
@@ -24,6 +23,7 @@ function App() {
   const deleteTodoHandler = (id) => {
     const newTodoList = toDoList.filter((item) => item.id !== id);
     setToDoList(newTodoList);
+    setToDoTitle("");
   };
 
   const editTodoHandler = (id) => {
@@ -45,7 +45,7 @@ function App() {
     );
     setEditMode(false);
     setToDoTitle("");
-    setEditableTdo(null)
+    setEditableTdo(null);
   };
 
   return (
@@ -70,8 +70,18 @@ function App() {
           {toDoList.map((todo) => (
             <li>
               <span>{todo.title}</span>
-              <button className="edit-btn" onClick={() => editTodoHandler(todo.id)}>Edit</button>
-              <button className="delete-btn" onClick={() => deleteTodoHandler(todo.id)}>Delete</button>
+              <button
+                className="edit-btn"
+                onClick={() => editTodoHandler(todo.id)}
+              >
+                Edit
+              </button>
+              <button
+                className="delete-btn"
+                onClick={() => deleteTodoHandler(todo.id)}
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>
