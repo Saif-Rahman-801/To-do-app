@@ -64,7 +64,7 @@ function App() {
           }}
           className="add-btn"
         >
-          {editMode ? "Update to do" : "Add to-do"}
+          {editMode ? "Update-to-do" : "Add-to-do"}
         </button>
         <ul className="to-do-list">
           {toDoList.map((todo) => (
